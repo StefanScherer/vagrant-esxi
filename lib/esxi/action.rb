@@ -36,7 +36,7 @@ module VagrantPlugins
               end
               
               b3.use Provision
-              b3.use SyncFolders 
+              #b3.use SyncFolders 
             end        
           end
         end
@@ -101,7 +101,7 @@ module VagrantPlugins
             end
           end
           b.use Provision          
-          b.use SyncFolders          
+          #b.use SyncFolders          
         end
       end
 
@@ -154,7 +154,7 @@ module VagrantPlugins
       autoload :MessageNotRunning, action_root.join("message_not_running")
       autoload :PowerOff, action_root.join("power_off")
       autoload :PowerOn, action_root.join("power_on")
-      autoload :SyncFolders, action_root.join("sync_folders")
+      #autoload :SyncFolders, action_root.join("sync_folders")
     end
   end
 end
