@@ -20,6 +20,11 @@ module VagrantPlugins
         Provider
       end
 
+      command(:esxi) do
+        require_relative "command"
+        Command
+      end
+
       def self.setup_i18n
         I18n.load_path << File.expand_path("locales/en.yml", ESXi.source_root)
         I18n.reload!
