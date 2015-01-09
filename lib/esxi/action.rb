@@ -126,6 +126,28 @@ module VagrantPlugins
         end
       end
 
+      # Adding support to allow suspend of the VM
+      def self.action_suspend
+        Vagrant::Action::Builder.new.tap do |b|
+          b.use ConfigValidate
+          b.use Call, IsCreated do |env, b2|
+            if !env[:result]
+              b2.use MessageNotCreated
+              next
+            end
+
+            b2.use Call, IsRunning do |env, b3|
+              if !env[:result]
+                b3.use MessageNotRunning
+                next
+              end
+
+              b3.use Suspend
+            end
+          end
+        end
+      end
+
       # ESXi specific actions
       def self.action_get_state
         Vagrant::Action::Builder.new.tap do |b|
@@ -154,6 +176,7 @@ module VagrantPlugins
       autoload :MessageNotRunning, action_root.join("message_not_running")
       autoload :PowerOff, action_root.join("power_off")
       autoload :PowerOn, action_root.join("power_on")
+      autoload :Suspend, action_root.join("suspend")
       #autoload :SyncFolders, action_root.join("sync_folders")
     end
   end
