@@ -6,6 +6,7 @@ This is a Vagrant plugin for VMware ESXi.
 
 ## Usage
 
+    git clone https://github.com/frankus0512/vagrant-esxi
     gem build vagrant-esxi.gemspec
     vagrant plugin install ./vagrant-esxi-*.gem
 
@@ -17,18 +18,15 @@ This is a Vagrant plugin for VMware ESXi.
 
 ## Example Vagrantfile
 
-    config.vm.box = "precise64_vmware"
-    config.vm.box_url = "http://files.vagrantup.com/precise64_vmware.box"
-    config.vm.hostname = "precise64"
-
+    config.vm.box = "precise64_vmware"          // Template (source) VM's name already created on the ESXi
     config.vm.provider :esxi do |esxi|
-      esxi.name = "precise64"
-      esxi.host = "host"
-      esxi.datastore = "datastore1"
-      esxi.user = "root"
-      esxi.password = "Zkg1nJXM1sh19sw9uV6P"
+      esxi.name = "newname"                     // New name you would like to call the (target) VM
+      esxi.host = "host"                        // ESXi hostname or IP address
+      esxi.srcds = "datastore1"                 // Source datastore name where the source VM is on
+      esxi.dstds = "datastore2"                 // Destination datastore name where the target VM will be cloned to
+      esxi.user = "root"                        // ESXi username with idrsa.pub key installed
     end
 
 ## Issues
 
-https://github.com/pdericson/vagrant-esxi/issues
+https://github.com/frankus0512/vagrant-esxi/issues
